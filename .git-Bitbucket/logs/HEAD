@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 bbbf41516e51d9975146820b4a1bc94e8541d223 Sarfraz Malik <sarfrazmalik111@gmail.com> 1629348925 +0530	clone: from https://sarfrazmalik111@bitbucket.org/bzc/bzpayroll_repository.git
+bbbf41516e51d9975146820b4a1bc94e8541d223 12866acf3cf1bd86b31b107bebd138dc6f2e8028 Sarfraz Malik <sarfrazmalik111@gmail.com> 1629532224 +0530	commit: Update login and register page design, and code changes in register same as namemaxx
+12866acf3cf1bd86b31b107bebd138dc6f2e8028 cd0cbc99bfea447dbaa6d6892176b7b9c27bad6b Sarfraz Malik <sarfrazmalik111@gmail.com> 1629540497 +0530	commit: Code changes to format phone number only for USA
+cd0cbc99bfea447dbaa6d6892176b7b9c27bad6b 15cfdb46b0ba5e993befae570a7a025c9aadcb8f Sarfraz Malik <sarfrazmalik111@gmail.com> 1629541721 +0530	commit: Code changes to add 1 second delay to load country, state and city on register page
+15cfdb46b0ba5e993befae570a7a025c9aadcb8f dfa47e4889db3389ce6cb87b7164e4510a07ddf0 Sarfraz Malik <sarfrazmalik111@gmail.com> 1633240435 +0530	commit: put tomcat repo together
+dfa47e4889db3389ce6cb87b7164e4510a07ddf0 250ed2e0425bd3cd87d2b2a0ba5ba262cc737fdf Sarfraz Malik <sarfrazmalik111@gmail.com> 1633240703 +0530	commit: Changed artifact name in pom file
+250ed2e0425bd3cd87d2b2a0ba5ba262cc737fdf bbbf41516e51d9975146820b4a1bc94e8541d223 Sarfraz Malik <sarfrazmalik111@gmail.com> 1633240852 +0530	checkout: moving from bugfix/sarfraz to master
+bbbf41516e51d9975146820b4a1bc94e8541d223 250ed2e0425bd3cd87d2b2a0ba5ba262cc737fdf Sarfraz Malik <sarfrazmalik111@gmail.com> 1633240887 +0530	checkout: moving from master to bugfix/sarfraz

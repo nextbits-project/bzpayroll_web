@@ -1,0 +1,189 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<%@include file="/WEB-INF/jsp/include/header.jsp"%>
+<title>${sessionScope.user} - <spring:message code="BzComposer.Report.payrollmonthlylist"/></title>
+</head>
+<body>
+
+<form:form action="/dashboard/Reports?tabid=Monthly" method="post" id="salesboardForm" name="salesboardForm"  modelAttribute="salesBoardDto" >
+	<div class="report-form-headerpanel" id="headerPanel">
+		<table>
+		   <tr>
+		   <%-- 	<td><input type="button" value='<spring:message code="BzComposer.Report.btn.ModifyReport"/>' class="formbutton mar"></td> --%>
+		   <%-- 	<td><input type="button" value='<spring:message code="BzComposer.Report.btn.Print"/>' class="formbutton mar" onclick="printPage()"></td> --%>
+		   	<td><input type="button" value='<spring:message code="BzComposer.Report.btn.Email"/>' class="formbutton mar" onclick="sendMail()" id="email"></td>
+		   	<td><input id="btnHeader1" type="button" value='<spring:message code="BzComposer.Report.btn.HideHeader"/>' class="formbutton mar" onclick="hideShowHeader()"></td>
+		   	<td><input type="button" value='<spring:message code="BzComposer.Report.btn.Refresh"/>' class="formbutton mar" onclick="search()"></td>
+		   	
+		   </tr>
+		</table>
+	</div>
+	<div class="report-form-underheader">
+	 <table>
+	    	<tr>
+	    		<td>
+	    		  <label style="padding-right: 10px"><spring:message code="BzComposer.payroll.Month"/></label>
+	    		</td>
+	    		<td>
+	    		  <form:select path="month">
+	    		  <form:option value=""><spring:message code="BzComposer.ComboBox.Select" /></form:option>
+                  <form:option value="1">January</form:option>
+                  <form:option value="2">February</form:option>
+                  <form:option value="3">March</form:option>
+                  <form:option value="4">April</form:option>
+                  <form:option value="5">May</form:option>
+                  <form:option value="6">June</form:option>
+                  <form:option value="7">July</form:option>
+                  <form:option value="8">August</form:option>
+                  <form:option value="9">September</form:option>
+                  <form:option value="10">October</form:option>
+                  <form:option value="11">November</form:option>
+                  <form:option value="12">December</form:option>
+	    		  </form:select>
+	    		</td>
+	    		<td>
+                        <form:select id="year"   path="year">
+                            <form:option value=""><spring:message code="BzComposer.ComboBox.Select"/></form:option>
+                            <form:option value="2021">2021</form:option>
+                            <form:option value="2020">2020</form:option>
+                            <form:option value="2019">2019</form:option>
+                            <form:option value="2018">2018</form:option>
+                            <form:option value="2017">2017</form:option>
+                            <form:option value="2016">2016</form:option>
+                            <form:option value="2015">2015</form:option>
+                        </form:select>
+	    		</td>
+	    		<td><input type="button" value='<spring:message code="BzComposer.sales.Search"/>' class="formbutton mar" style="margin-left: 195px" onclick="search()"></td>
+	    	</tr>
+	 </table>
+	</div>
+<div id="printContent">	
+	<div id="headerBar">
+	      <h5 style="text-align: center;color: blue;padding-top: 20px">${sessionScope.user}</h5>
+	      <h6 style="text-align: center;color: blue;" id="headerBarValue"><spring:message code="BzComposer.Report.payrollmonthlylist"/></h6>
+	</div>
+	<div id="table-negotiations"
+		style="overflow:auto;height:400; text-align: center;">
+		
+		<table class="tabla-customListOds" cellspacing="0" id="exportPd" border="1">
+
+		<thead>
+			<tr>
+				<th><spring:message code="BzComposer.Employee.SSN" /></th>
+				<th><spring:message code="BzComposer.Employee.Name" /></th>
+				<th><spring:message code="BzComposer.Employee.PayPeriod" /></th>
+				<th><spring:message code="BzComposer.popayable.paiddate" /></th>
+				<th><spring:message code="BzComposer.payroll.Payroll" /></th>
+				<th><spring:message code="BzComposer.Employee.FICA" /></th>
+				<th><spring:message code="BzComposer.Employee.FIT" /></th>
+				<th><spring:message code="BzComposer.payroll.StateDisablitiyInsurance" /></th>
+ 				<th><spring:message code="BzComposer.payroll.NetSalary" /></th>
+				<th><spring:message code="BzComposer.payroll.PaymentMethod" /></th>
+ 			</tr>
+		</thead>
+
+		<tbody>
+			<c:if test="${not empty CustomerDetails}">
+     		<c:forEach items="${CustomerDetails}" var="sale">
+                <tr>
+                <td>${sale.ssn}</td>
+                <td>${sale.employeeName}</td>
+                <td>${sale.month}</td>
+                <td>${sale.datePaid}</td>
+                <td>${sale.datePaid}</td>
+                <td>${sale.fICA}</td>
+                <td>${sale.datePaid}</td>
+                <td>${sale.stateDisablitiyInsurance}</td>
+                <td>${sale.netSalary}</td>
+                <td>${sale.paymentMethod}</td>
+                </tr>
+			</c:forEach>
+			</c:if>
+		</tbody>
+	</table>
+	</div>
+</div>	
+</form:form>
+<%@ include file="/WEB-INF/jsp/include/footer.jsp"%>
+<%@ include file="/WEB-INF/jsp/include/emailModal.jsp"%>
+<!-- Javascript begins here -->
+<script type="text/javascript">
+var modal = document.getElementById('myModal');
+function hideShowHeader()
+{
+	debugger;
+	document.getElementById("headerBar").style.display = "none";
+	/* $("#btnHeader1").hide(); */
+	document.getElementById("headerBar").style.display = "none";
+	$("#btnHeader1").replaceWith("<input id='btnHeader2' type='button' value='<spring:message code='BzComposer.Report.btn.ShowHeader'/>' class='formbutton mar' onclick='ShowHeader()'>");
+}
+function ShowHeader()
+{
+	document.getElementById("headerBar").style.display = "block";
+	$("#btnHeader2").replaceWith("<input id='btnHeader1' type='button' value='<spring:message code='BzComposer.Report.btn.HideHeader'/>' class='formbutton mar' onclick='hideShowHeader()'>");
+}
+function printPage()
+{
+	/*   debugger;
+	  var doc = new jsPDF("1", "pt","a2");  
+	  var source = $("#printContent")[0]; 
+	  doc.fromHTML(source); 
+	  doc.save($("#headerBarValue").html()+".pdf");  */
+	  
+	  //for creating pdf 
+	   var divToPrint=document.getElementById("exportPd");
+	   var header = document.getElementById("headerBar");
+	   newWin= window.open("");
+	   newWin.document.write(header.outerHTML+divToPrint.outerHTML);
+	   newWin.print();
+	   newWin.close(); 
+	 
+	   //for creating excel
+	   debugger;
+	   str="";
+
+  var myTableHead = document.getElementById('ProfitLossItem');
+  var rowCount = myTableHead.rows.length;
+  var colCount = myTableHead.getElementsByTagName("tr")[0].getElementsByTagName("th").length; 
+
+var ExcelApp = new ActiveXObject("Excel.Application");
+var ExcelSheet = new ActiveXObject("Excel.Sheet");
+ExcelSheet.Application.Visible = true;
+
+for(var i=0; i<rowCount; i++) 
+{   
+    for(var j=0; j<colCount; j++) 
+    {           
+        str= myTableHead.getElementsByTagName("tr")[i].getElementsByTagName("th")[j].innerHTML;
+        ExcelSheet.ActiveSheet.Cells(i+1,j+1).Value = str;
+    }
+}
+	/* window.open('data:application/vnd.ms-excel,' + $('#ProfitLossItem').html()); */
+}
+function search()
+{
+	document.forms[0].action = "/dashboard/Reports?tabid=Monthly";
+	document.forms[0].submit();
+}
+function sendMail() {
+	modal.style.display = "block";
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+}
+function closeModal()
+{
+	modal.style.display = "none";
+}
+</script>
+<!-- Javascript end here -->
+</body>
+</html>
