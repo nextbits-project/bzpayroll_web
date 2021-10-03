@@ -25,7 +25,6 @@ dist/
 
 # JetBrains IDE
 .idea/
-.gitBitbucket/
 
 # Unit test reports
 TEST*.xml
